@@ -8,17 +8,7 @@
       "maxDuration": 15
     }
   },
-  "routes": [
-    { "src": "/css/(.*)", "dest": "/css/$1" },
-    { "src": "/img/(.*)", "dest": "/img/$1" },
-    { "src": "/js/(.*)", "dest": "/js/$1" },
-    { "src": "/favicon.ico", "dest": "/favicon.ico" },
-    { "src": "/favicon.svg", "dest": "/favicon.svg" },
-    { "src": "/favicon-32.png", "dest": "/favicon-32.png" },
-    { "src": "/apple-touch-icon.png", "dest": "/apple-touch-icon.png" },
-    { "src": "/icon-(.*)", "dest": "/icon-$1" },
-    { "src": "/logo.svg", "dest": "/logo.svg" },
-    { "src": "/site.webmanifest", "dest": "/site.webmanifest" },
-    { "src": "/(.*)", "dest": "/api/index.js" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index.js" }
   ]
 }
