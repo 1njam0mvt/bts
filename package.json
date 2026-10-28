@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "ARMY Hub: unofficial BTS fan site with admin panel",
   "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build:css": "tailwindcss -c tailwind.config.js -i src/input.css -o public/css/site.css --minify",
     "build": "npm run build:css",
     "seed": "node scripts/seed.js",
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "icons": "node scripts/icons.js"
+    "icons": "node scripts/icons.js",
+    "vercel-build": "npm run build"
   },
   "keywords": [],
   "author": "",

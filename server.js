@@ -25,7 +25,9 @@ const PROD = process.env.NODE_ENV === 'production';
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, 'public');
-const UPLOADS = process.env.UPLOAD_DIR ? path.resolve(process.env.UPLOAD_DIR) : path.join(ROOT, 'uploads');
+/* Vercel's filesystem is read-only except /tmp. */
+const UPLOADS = process.env.UPLOAD_DIR ? path.resolve(process.env.UPLOAD_DIR)
+  : process.env.VERCEL ? '/tmp/uploads' : path.join(ROOT, 'uploads');
 fs.mkdirSync(UPLOADS, { recursive: true });
 store.load();
 
@@ -41,6 +43,7 @@ const sha = (s) => crypto.createHash('sha256').update(String(s)).digest();
 const same = (a, b) => crypto.timingSafeEqual(sha(a), sha(b));
 
 /* ---------- app ---------- */
+/* Express app, exported for Vercel. */
 const app = express();
 app.disable('x-powered-by');
 if (process.env.TRUST_PROXY) app.set('trust proxy', process.env.TRUST_PROXY === 'true' ? 1 : process.env.TRUST_PROXY);
@@ -443,15 +446,20 @@ app.use((err, req, res, next) => {            // eslint-disable-line no-unused-v
   res.status(500).type('text').send('Something went wrong. Please try again.');
 });
 
-app.listen(PORT, () => {
-  console.log(`ARMY Hub running on http://localhost:${PORT}  (${PROD ? 'production' : 'development'})`);
-  /* First start only: swap placeholder covers for the official artwork. Retry any time from /admin > Albums. */
-  const db = store.get();
-  if (process.env.AUTO_IMPORT_COVERS !== 'false' && !db.coversTried) {
-    setTimeout(async () => {
-      db.coversTried = true; await store.save();
-      const r = await importCovers(false).catch((e) => ({ updated: [], missed: [], network: e.message }));
-      console.log(`[covers] imported ${r.updated.length}${r.network ? ` (stopped: ${r.network})` : ''}${r.missed.length ? `; no match: ${r.missed.join(', ')}` : ''}`);
-    }, 3000);
-  }
-});
+/* Local / traditional host: listen on a port. On Vercel the app is served by the api entry instead. */
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`ARMY Hub running on http://localhost:${PORT}  (${PROD ? 'production' : 'development'})`);
+    /* First start only: swap placeholder covers for the official artwork. Retry any time from /admin > Albums. */
+    const db = store.get();
+    if (process.env.AUTO_IMPORT_COVERS !== 'false' && !db.coversTried) {
+      setTimeout(async () => {
+        db.coversTried = true; await store.save();
+        const r = await importCovers(false).catch((e) => ({ updated: [], missed: [], network: e.message }));
+        console.log(`[covers] imported ${r.updated.length}${r.network ? ` (stopped: ${r.network})` : ''}${r.missed.length ? `; no match: ${r.missed.join(', ')}` : ''}`);
+      }, 3000);
+    }
+  });
+}
+
+module.exports = app;
