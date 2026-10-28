@@ -1,0 +1,568 @@
+{
+  "settings": {
+    "siteName": "ARMY Hub",
+    "tagline": "A fan-made home for BTS fans",
+    "shopifyStore": "",
+    "fallbackShopUrl": "https://shop.weverse.io/en/home",
+    "heroAlbumId": "0000000001",
+    "heroBlurb": "BTS's 2026 comeback album, their first full-group release after the members' military service. Hear 25 seconds of SWIM from the official video, then stream or collect the album.",
+    "preview": {
+      "youtubeId": "b4iVv91Z6lY",
+      "start": 55,
+      "label": "SWIM"
+    },
+    "autoApproveLetters": false,
+    "contactEmail": "",
+    "operatorName": "",
+    "jurisdiction": "India",
+    "legalUpdated": "2026-10-23",
+    "social": {
+      "x": "https://x.com/BTS_twt",
+      "instagram": "https://www.instagram.com/bts.bighitofficial/",
+      "youtube": "https://www.youtube.com/@BANGTANTV",
+      "tiktok": "https://www.tiktok.com/@bts_official_bighit"
+    }
+  },
+  "albums": [
+    {
+      "id": "0000000001",
+      "title": "Normal",
+      "year": 2026,
+      "released": "2026-07-17",
+      "type": "Single",
+      "handle": "normal",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-normal.webp",
+      "thumb": "/img/seed/album-normal-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "0000000002",
+      "title": "Hooligan",
+      "year": 2026,
+      "released": "2026-04-07",
+      "type": "Single",
+      "handle": "hooligan",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-hooligan.webp",
+      "thumb": "/img/seed/album-hooligan-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "0000000003",
+      "title": "ARIRANG",
+      "year": 2026,
+      "released": "2026-03-20",
+      "type": "Album",
+      "handle": "arirang",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-arirang.webp",
+      "thumb": "/img/seed/album-arirang-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "0000000004",
+      "title": "Swim",
+      "year": 2026,
+      "released": "2026-03-20",
+      "type": "Single",
+      "handle": "swim",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-swim.webp",
+      "thumb": "/img/seed/album-swim-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "0000000005",
+      "title": "Proof",
+      "year": 2022,
+      "released": "2022-06-10",
+      "type": "Album",
+      "handle": "proof",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/fan/album-proof.webp",
+      "thumb": "/img/fan/album-proof.webp",
+      "width": 472,
+      "height": 472
+    },
+    {
+      "id": "0000000006",
+      "title": "Butter",
+      "year": 2021,
+      "released": "2021-05-21",
+      "type": "Single",
+      "handle": "butter",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-butter.webp",
+      "thumb": "/img/seed/album-butter-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "0000000007",
+      "title": "BE",
+      "year": 2020,
+      "released": "2020-11-20",
+      "type": "Album",
+      "handle": "be",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/fan/album-be.webp",
+      "thumb": "/img/fan/album-be.webp",
+      "width": 472,
+      "height": 472
+    },
+    {
+      "id": "0000000008",
+      "title": "Dynamite",
+      "year": 2020,
+      "released": "2020-08-21",
+      "type": "Single",
+      "handle": "dynamite",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-dynamite.webp",
+      "thumb": "/img/seed/album-dynamite-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "0000000009",
+      "title": "Map of the Soul: 7",
+      "year": 2020,
+      "released": "2020-02-21",
+      "type": "Album",
+      "handle": "map-of-the-soul-7",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/fan/album-map-of-the-soul-7.webp",
+      "thumb": "/img/fan/album-map-of-the-soul-7.webp",
+      "width": 472,
+      "height": 472
+    },
+    {
+      "id": "000000000a",
+      "title": "Map of the Soul: Persona",
+      "year": 2019,
+      "released": "2019-04-12",
+      "type": "EP",
+      "handle": "map-of-the-soul-persona",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/fan/album-map-of-the-soul-persona.webp",
+      "thumb": "/img/fan/album-map-of-the-soul-persona.webp",
+      "width": 472,
+      "height": 472
+    },
+    {
+      "id": "000000000b",
+      "title": "Love Yourself: Answer",
+      "year": 2018,
+      "released": "2018-08-24",
+      "type": "Album",
+      "handle": "love-yourself-answer",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-love-yourself-answer.webp",
+      "thumb": "/img/seed/album-love-yourself-answer-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "000000000c",
+      "title": "Love Yourself: Tear",
+      "year": 2018,
+      "released": "2018-05-18",
+      "type": "Album",
+      "handle": "love-yourself-tear",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/fan/album-love-yourself-tear.webp",
+      "thumb": "/img/fan/album-love-yourself-tear.webp",
+      "width": 472,
+      "height": 472
+    },
+    {
+      "id": "000000000d",
+      "title": "Wings",
+      "year": 2016,
+      "released": "2016-10-10",
+      "type": "Album",
+      "handle": "wings",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/fan/album-wings.webp",
+      "thumb": "/img/fan/album-wings.webp",
+      "width": 472,
+      "height": 472
+    },
+    {
+      "id": "000000000e",
+      "title": "Dark & Wild",
+      "year": 2014,
+      "released": "2014-08-20",
+      "type": "Album",
+      "handle": "dark-and-wild",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-dark-and-wild.webp",
+      "thumb": "/img/seed/album-dark-and-wild-thumb.webp",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "000000000f",
+      "title": "2 Cool 4 Skool",
+      "year": 2013,
+      "released": "2013-06-12",
+      "type": "Single",
+      "handle": "2-cool-4-skool",
+      "shopUrl": "",
+      "musicUrl": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+      "image": "/img/seed/album-2-cool-4-skool.webp",
+      "thumb": "/img/seed/album-2-cool-4-skool-thumb.webp",
+      "width": 900,
+      "height": 900
+    }
+  ],
+  "gallery": [
+    {
+      "id": "0000000010",
+      "member": "BTS",
+      "category": "Concept",
+      "caption": "BTS standing on a mirror-like lake under a purple starry sky",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/hero-group.webp",
+      "thumb": "/img/fan/hero-group-thumb.webp",
+      "width": 836,
+      "height": 626
+    },
+    {
+      "id": "0000000011",
+      "member": "BTS",
+      "category": "Concert",
+      "caption": "BTS on stage in front of a sea of purple light sticks",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/gallery-concert.webp",
+      "thumb": "/img/fan/gallery-concert-thumb.webp",
+      "width": 760,
+      "height": 706
+    },
+    {
+      "id": "0000000012",
+      "member": "RM",
+      "category": "Members",
+      "caption": "RM portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-rm.webp",
+      "thumb": "/img/fan/member-rm-thumb.webp",
+      "width": 762,
+      "height": 763
+    },
+    {
+      "id": "0000000013",
+      "member": "Jin",
+      "category": "Members",
+      "caption": "Jin portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-jin.webp",
+      "thumb": "/img/fan/member-jin-thumb.webp",
+      "width": 706,
+      "height": 766
+    },
+    {
+      "id": "0000000014",
+      "member": "BTS",
+      "category": "Concept",
+      "caption": "BTS in a chandelier-lit lavender hall, concept photo",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/group-chandelier.webp",
+      "thumb": "/img/fan/group-chandelier-thumb.webp",
+      "width": 762,
+      "height": 763
+    },
+    {
+      "id": "0000000015",
+      "member": "SUGA",
+      "category": "Members",
+      "caption": "SUGA portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-suga.webp",
+      "thumb": "/img/fan/member-suga-thumb.webp",
+      "width": 766,
+      "height": 763
+    },
+    {
+      "id": "0000000016",
+      "member": "BTS",
+      "category": "Group",
+      "caption": "BTS in dark suits against a warm orange backdrop",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/gallery-group.webp",
+      "thumb": "/img/fan/gallery-group-thumb.webp",
+      "width": 760,
+      "height": 517
+    },
+    {
+      "id": "0000000017",
+      "member": "j-hope",
+      "category": "Members",
+      "caption": "j-hope portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-jhope.webp",
+      "thumb": "/img/fan/member-jhope-thumb.webp",
+      "width": 768,
+      "height": 767
+    },
+    {
+      "id": "0000000018",
+      "member": "Jimin",
+      "category": "Members",
+      "caption": "Jimin portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-jimin.webp",
+      "thumb": "/img/fan/member-jimin-thumb.webp",
+      "width": 763,
+      "height": 767
+    },
+    {
+      "id": "0000000019",
+      "member": "BTS",
+      "category": "Group",
+      "caption": "BTS members in pink outfits sharing a group hug",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/gallery-hug.webp",
+      "thumb": "/img/fan/gallery-hug-thumb.webp",
+      "width": 760,
+      "height": 500
+    },
+    {
+      "id": "000000001a",
+      "member": "V",
+      "category": "Members",
+      "caption": "V portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-v.webp",
+      "thumb": "/img/fan/member-v-thumb.webp",
+      "width": 617,
+      "height": 768
+    },
+    {
+      "id": "000000001b",
+      "member": "Jung Kook",
+      "category": "Members",
+      "caption": "Jung Kook portrait",
+      "credit": "Supplied by the site owner",
+      "image": "/img/fan/member-jungkook.webp",
+      "thumb": "/img/fan/member-jungkook-thumb.webp",
+      "width": 763,
+      "height": 765
+    }
+  ],
+  "videos": [
+    {
+      "id": "000000001c",
+      "type": "Music Video",
+      "title": "BTS (방탄소년단) 'SWIM' Official MV",
+      "meta": "HYBE LABELS",
+      "youtubeId": "b4iVv91Z6lY",
+      "url": "",
+      "image": "/img/seed/video-1.webp"
+    },
+    {
+      "id": "000000001d",
+      "type": "Music Video",
+      "title": "BTS (방탄소년단) '2.0' Official MV",
+      "meta": "HYBE LABELS",
+      "youtubeId": "_gyultVTesk",
+      "url": "",
+      "image": "/img/seed/video-2.webp"
+    },
+    {
+      "id": "000000001e",
+      "type": "Music Video",
+      "title": "BTS (방탄소년단) 'NORMAL' Official MV",
+      "meta": "HYBE LABELS",
+      "youtubeId": "GEk4jHwfFTA",
+      "url": "",
+      "image": "/img/seed/video-3.webp"
+    },
+    {
+      "id": "000000001f",
+      "type": "Music Video",
+      "title": "BTS 'Hooligan' Official MV",
+      "meta": "HYBE LABELS",
+      "youtubeId": "",
+      "url": "https://www.youtube.com/results?search_query=BTS%20Hooligan%20Official%20MV%20HYBE%20LABELS",
+      "image": "/img/seed/video-4.webp"
+    },
+    {
+      "id": "0000000020",
+      "type": "Music Video",
+      "title": "BTS 'Body to Body' MV",
+      "meta": "HYBE LABELS",
+      "youtubeId": "",
+      "url": "https://www.youtube.com/results?search_query=BTS%20Body%20to%20Body%20MV%20HYBE%20LABELS",
+      "image": "/img/seed/video-5.webp"
+    },
+    {
+      "id": "0000000021",
+      "type": "Run BTS",
+      "title": "Run BTS EP.136: Variety Quiz Show, Part 1",
+      "meta": "Run BTS",
+      "youtubeId": "Ug01oaptA2s",
+      "url": "",
+      "image": "/img/seed/video-6.webp"
+    },
+    {
+      "id": "0000000022",
+      "type": "Run BTS",
+      "title": "Run BTS! EP.33: BTS X MANITO",
+      "meta": "Run BTS",
+      "youtubeId": "AbGcosDdT2Y",
+      "url": "",
+      "image": "/img/seed/video-7.webp"
+    },
+    {
+      "id": "0000000023",
+      "type": "Run BTS",
+      "title": "BTS's TRIP EP.1",
+      "meta": "BANGTANTV",
+      "youtubeId": "wu6bA3zK_us",
+      "url": "",
+      "image": "/img/seed/video-8.webp"
+    },
+    {
+      "id": "0000000024",
+      "type": "Vlog",
+      "title": "ONE LUCKY DAY: V's VLOG",
+      "meta": "BANGTANTV",
+      "youtubeId": "ifimMx-kcqE",
+      "url": "",
+      "image": "/img/seed/video-9.webp"
+    },
+    {
+      "id": "0000000025",
+      "type": "Vlog",
+      "title": "[VLOG] RM's Trip in Europe",
+      "meta": "BANGTANTV",
+      "youtubeId": "TVmawu479vY",
+      "url": "",
+      "image": "/img/seed/video-10.webp"
+    }
+  ],
+  "shop": [
+    {
+      "id": "0000000026",
+      "title": "Albums",
+      "note": "CDs, vinyl and photocard sets.",
+      "handle": "albums"
+    },
+    {
+      "id": "0000000027",
+      "title": "Light Sticks",
+      "note": "For the next show or the couch.",
+      "handle": "light-sticks"
+    },
+    {
+      "id": "0000000028",
+      "title": "Merch",
+      "note": "Apparel and everyday goods.",
+      "handle": "merch"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "0000000029",
+      "q": "What is ARMY Hub?",
+      "a": "ARMY Hub is a fan-made website for BTS fans. It collects albums, photos, videos, fan letters and shop links in one place so they are easy to browse and search."
+    },
+    {
+      "id": "000000002a",
+      "q": "Is ARMY Hub an official BTS or HYBE website?",
+      "a": "No. ARMY Hub is an unofficial fan project. It is not affiliated with, endorsed by or connected to BigHit Music, HYBE or BTS. All names, logos and trademarks belong to their owners."
+    },
+    {
+      "id": "000000002b",
+      "q": "How do I write a fan letter?",
+      "a": "Open the Fan Letters section, pick who the letter is to, write your message and press Send. Choose a nickname; you do not need to share your real name or email. After sending you get a private edit code. Keep it safe."
+    },
+    {
+      "id": "000000002c",
+      "q": "Can I edit or rewrite my fan letter later?",
+      "a": "Yes. On the device you used, your letters appear under \"My letters\" with Edit and Delete buttons. On another device, open \"Edit a letter with a code\" and enter your edit code. Changed letters are checked again before they appear on the wall."
+    },
+    {
+      "id": "000000002d",
+      "q": "Why is my letter not on the wall yet?",
+      "a": "Every new or edited letter is read by a person first, to keep the wall kind and safe. This usually takes a day or two. Letters with web links, personal contact details or hurtful content are not published."
+    },
+    {
+      "id": "000000002e",
+      "q": "Where can I listen to BTS music?",
+      "a": "Each album card has a button that opens the album in the store or on a streaming service. You can also find official releases on the major streaming platforms and the official YouTube channels linked in the footer."
+    },
+    {
+      "id": "000000002f",
+      "q": "Where do I buy albums and merchandise?",
+      "a": "The Shop section and the buy buttons open the store set up by the site owner. For products made by the artist's company, the official Weverse Shop is the safest source. Check that any seller you use is licensed."
+    },
+    {
+      "id": "0000000030",
+      "q": "How can I avoid fake or unlicensed merchandise?",
+      "a": "Buy from the official store or from authorized retailers. Be careful with prices far below normal, sellers with no return policy, and listings that use blurry or copied product photos."
+    },
+    {
+      "id": "0000000031",
+      "q": "What is the 25-second preview on the home page?",
+      "a": "It plays a short clip of the official SWIM music video from HYBE LABELS on YouTube. It only loads when you press play, and it stops by itself after 25 seconds."
+    },
+    {
+      "id": "0000000032",
+      "q": "Can I send in photos or fan art?",
+      "a": "Yes. Use the contact form and tell us what you would like to share. Only send work you created or have permission to share, and tell us how you want to be credited. We will reply before anything is published."
+    },
+    {
+      "id": "0000000033",
+      "q": "Something of mine is on the site. How do I ask for it to be removed?",
+      "a": "Use the contact form, include the page address and say what should be removed. We act on removal requests quickly and do not ask you to explain why."
+    },
+    {
+      "id": "0000000034",
+      "q": "How do I switch between dark and light mode?",
+      "a": "Use the sun or moon button at the top right of every page. The site remembers your choice on that device and follows your device setting until you pick one."
+    },
+    {
+      "id": "0000000035",
+      "q": "Do you sell concert tickets?",
+      "a": "No. Buy tickets only through the official channels announced for each show."
+    },
+    {
+      "id": "0000000036",
+      "q": "How does the search bar work?",
+      "a": "Type a word such as an album name, a member name or \"vlog\". The albums, photos and videos on the home page filter as you type."
+    },
+    {
+      "id": "0000000037",
+      "q": "How is my information used if I contact you or write a letter?",
+      "a": "Contact messages are used only to reply to you. Fan letters are shown publicly with the nickname you choose once approved. See the Privacy Policy for full details, including how long things are kept."
+    },
+    {
+      "id": "0000000038",
+      "q": "I found a broken link or a mistake. What should I do?",
+      "a": "Please tell us through the contact form with the page and what looks wrong. Corrections are usually made within a few days."
+    }
+  ],
+  "letters": [],
+  "messages": []
+}

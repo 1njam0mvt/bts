@@ -1,0 +1,128 @@
+{
+ "hero-group": {
+  "image": "/img/fan/hero-group.webp",
+  "thumb": "/img/fan/hero-group-thumb.webp",
+  "width": 836,
+  "height": 626,
+  "thumbWidth": 520
+ },
+ "galaxy": {
+  "image": "/img/fan/galaxy.webp",
+  "thumb": "/img/fan/galaxy.webp",
+  "width": 1600,
+  "height": 715
+ },
+ "group-chandelier": {
+  "image": "/img/fan/group-chandelier.webp",
+  "thumb": "/img/fan/group-chandelier-thumb.webp",
+  "width": 762,
+  "height": 763,
+  "thumbWidth": 480
+ },
+ "member-rm": {
+  "image": "/img/fan/member-rm.webp",
+  "thumb": "/img/fan/member-rm-thumb.webp",
+  "width": 762,
+  "height": 763,
+  "thumbWidth": 480
+ },
+ "member-jin": {
+  "image": "/img/fan/member-jin.webp",
+  "thumb": "/img/fan/member-jin-thumb.webp",
+  "width": 706,
+  "height": 766,
+  "thumbWidth": 480
+ },
+ "member-suga": {
+  "image": "/img/fan/member-suga.webp",
+  "thumb": "/img/fan/member-suga-thumb.webp",
+  "width": 766,
+  "height": 763,
+  "thumbWidth": 480
+ },
+ "member-jhope": {
+  "image": "/img/fan/member-jhope.webp",
+  "thumb": "/img/fan/member-jhope-thumb.webp",
+  "width": 768,
+  "height": 767,
+  "thumbWidth": 480
+ },
+ "member-jimin": {
+  "image": "/img/fan/member-jimin.webp",
+  "thumb": "/img/fan/member-jimin-thumb.webp",
+  "width": 763,
+  "height": 767,
+  "thumbWidth": 480
+ },
+ "member-v": {
+  "image": "/img/fan/member-v.webp",
+  "thumb": "/img/fan/member-v-thumb.webp",
+  "width": 617,
+  "height": 768,
+  "thumbWidth": 480
+ },
+ "member-jungkook": {
+  "image": "/img/fan/member-jungkook.webp",
+  "thumb": "/img/fan/member-jungkook-thumb.webp",
+  "width": 763,
+  "height": 765,
+  "thumbWidth": 480
+ },
+ "album-proof": {
+  "image": "/img/fan/album-proof.webp",
+  "thumb": "/img/fan/album-proof.webp",
+  "width": 472,
+  "height": 472
+ },
+ "album-be": {
+  "image": "/img/fan/album-be.webp",
+  "thumb": "/img/fan/album-be.webp",
+  "width": 472,
+  "height": 472
+ },
+ "album-wings": {
+  "image": "/img/fan/album-wings.webp",
+  "thumb": "/img/fan/album-wings.webp",
+  "width": 472,
+  "height": 472
+ },
+ "album-love-yourself-tear": {
+  "image": "/img/fan/album-love-yourself-tear.webp",
+  "thumb": "/img/fan/album-love-yourself-tear.webp",
+  "width": 472,
+  "height": 472
+ },
+ "album-map-of-the-soul-7": {
+  "image": "/img/fan/album-map-of-the-soul-7.webp",
+  "thumb": "/img/fan/album-map-of-the-soul-7.webp",
+  "width": 472,
+  "height": 472
+ },
+ "album-map-of-the-soul-persona": {
+  "image": "/img/fan/album-map-of-the-soul-persona.webp",
+  "thumb": "/img/fan/album-map-of-the-soul-persona.webp",
+  "width": 472,
+  "height": 472
+ },
+ "gallery-concert": {
+  "image": "/img/fan/gallery-concert.webp",
+  "thumb": "/img/fan/gallery-concert-thumb.webp",
+  "width": 760,
+  "height": 706,
+  "thumbWidth": 480
+ },
+ "gallery-group": {
+  "image": "/img/fan/gallery-group.webp",
+  "thumb": "/img/fan/gallery-group-thumb.webp",
+  "width": 760,
+  "height": 517,
+  "thumbWidth": 480
+ },
+ "gallery-hug": {
+  "image": "/img/fan/gallery-hug.webp",
+  "thumb": "/img/fan/gallery-hug-thumb.webp",
+  "width": 760,
+  "height": 500,
+  "thumbWidth": 480
+ }
+}
