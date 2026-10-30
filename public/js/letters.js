@@ -27,6 +27,23 @@
   }
   msg.addEventListener('input', () => { count.textContent = msg.value.length; });
 
+  /* Frame: the writing page takes the chosen look straight away. */
+  const paper = $('#paper'), tpl = $('#l-template');
+  const setFrame = (id) => {
+    const r = form.querySelector(`input[name="frame"][value="${id}"]`) || form.querySelector('input[name="frame"][value="classic"]');
+    if (r) r.checked = true;
+    paper.className = 'paper fr-' + (r ? r.value : 'classic');
+  };
+  form.addEventListener('change', (e) => { if (e.target.name === 'frame') setFrame(e.target.value); });
+  form.addEventListener('reset', () => setTimeout(() => setFrame('classic'), 0));
+  tpl.addEventListener('change', () => {
+    if (!tpl.value) return;
+    if (msg.value.trim() && !confirm('Replace what you have written with this template?')) { tpl.value = ''; return; }
+    msg.value = tpl.value; count.textContent = msg.value.length; msg.focus();
+    const i = msg.value.indexOf('['); if (i > -1) msg.setSelectionRange(i, msg.value.indexOf(']', i) + 1);   // jump to the first [blank]
+    tpl.value = '';
+  });
+
   function reset() {
     editing = null; form.reset(); count.textContent = '0';
     title.textContent = 'Write your letter'; send.textContent = 'Send letter'; cancel.hidden = true; say(status, '');
@@ -35,7 +52,7 @@
   function startEdit(letter, code) {
     editing = { id: letter.id, code };
     form.hidden = false; $('#l-done').hidden = true;
-    $('#l-nick').value = letter.nickname; $('#l-country').value = letter.country || ''; $('#l-to').value = letter.to; msg.value = letter.message;
+    $('#l-nick').value = letter.nickname; $('#l-country').value = letter.country || ''; $('#l-to').value = letter.to; msg.value = letter.message; setFrame(letter.frame || 'classic');
     count.textContent = msg.value.length;
     title.textContent = 'Edit your letter'; send.textContent = 'Save changes'; cancel.hidden = false; say(status, '');
     $('#letter-card').scrollIntoView({ behavior: 'smooth', block: 'center' }); $('#l-message').focus({ preventScroll: true });
@@ -53,7 +70,7 @@
       try {
         const { letter } = await api('POST', '/api/letters/lookup', { code: it.code });
         keep.push(it);
-        const card = el('article', 'letter mine');
+        const card = el('article', 'letter mine fr-' + (letter.frame || 'classic'));
         const top = el('div', 'flex flex-wrap items-center justify-between gap-2');
         top.append(el('p', 'letter-to', 'Dear ' + letter.to + ','), el('span', 'badge ' + (letter.status === 'approved' ? 'live' : 'wait'), letter.status === 'approved' ? 'On the wall' : 'Waiting for approval'));
         const actions = el('div', 'flex gap-2 flex-wrap');

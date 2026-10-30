@@ -1,6 +1,7 @@
 'use strict';
 /* Fan Letters: the public wall (server-rendered, approved letters only) and the writing form. */
 const { esc } = require('../lib/util');
+const { FRAMES, TEMPLATES } = require('../lib/frames');
 
 const TO = ['BTS', 'RM', 'Jin', 'SUGA', 'j-hope', 'Jimin', 'V', 'Jung Kook', 'ARMY'];
 const PAGE = 12;
@@ -9,7 +10,7 @@ const fmt = (iso) => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric',
 
 function letterCard(l) {
   return `
-<article class="letter">
+<article class="letter fr-${esc(l.frame || 'classic')}">
   <p class="letter-to">Dear ${esc(l.to)},</p>
   <p class="letter-body">${esc(l.message)}</p>
   <p class="letter-from"><span>With love, ${esc(l.nickname)}${l.country ? ` &middot; ${esc(l.country)}` : ''}</span><time datetime="${esc(l.createdAt.slice(0, 10))}">${esc(fmt(l.createdAt))}</time></p>
@@ -42,7 +43,12 @@ function section(db) {
             <div class="field"><label for="l-country">Country (optional)</label><input id="l-country" name="country" type="text" maxlength="40" autocomplete="country-name"></div>
           </div>
           <div class="field"><label for="l-to">Dear&hellip;</label><select id="l-to" name="to">${TO.map((t) => `<option>${esc(t)}</option>`).join('')}</select></div>
-          <div class="field"><label for="l-message">Your letter</label><textarea id="l-message" name="message" rows="8" minlength="20" maxlength="1200" required></textarea><span class="hint"><span id="l-count">0</span> / 1200</span></div>
+          <fieldset class="field" style="border:0;padding:0;margin:0;min-width:0">
+            <legend class="font-bold text-sm mb-2">Choose a frame</legend>
+            <div class="frame-grid">${FRAMES.map((f, i) => `<label class="frame-opt"><input class="sr-only" type="radio" name="frame" value="${f.id}"${i === 0 ? ' checked' : ''}><span class="sw fr-${f.id}"></span><span>${esc(f.name)}</span></label>`).join('')}</div>
+          </fieldset>
+          <div class="field"><label for="l-template">Start from a template (optional)</label><select id="l-template"><option value="">Blank page</option>${TEMPLATES.map((t) => `<option value="${esc(t.text)}">${esc(t.name)}</option>`).join('')}</select><span class="hint" style="justify-self:start">Fills the page with a starter. Replace the [brackets] with your own words.</span></div>
+          <div class="field"><label for="l-message">Your letter</label><div class="paper fr-classic" id="paper"><textarea id="l-message" name="message" rows="8" minlength="20" maxlength="1200" required placeholder="Write here&hellip;"></textarea></div><span class="hint"><span id="l-count">0</span> / 1200</span></div>
           <div class="hp" aria-hidden="true"><label for="l-website">Leave this field empty</label><input id="l-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
           <div class="flex flex-wrap items-center gap-3">
             <button class="btn btn-primary btn-sm" type="submit" id="l-send">Send letter</button>

@@ -7,31 +7,41 @@
   const root = $('#admin');
 
   const SCHEMA = {
-    albums: { label: 'Albums', title: 'title', sub: (i) => `${i.type} · ${i.released || i.year}`, fields: [
-      { k: 'title', l: 'Title', t: 'text', req: 1 }, { k: 'year', l: 'Year', t: 'number', req: 1 },
-      { k: 'released', l: 'Release date (optional)', t: 'date', h: 'Shown on the card instead of the year.' },
-      { k: 'type', l: 'Type', t: 'select', o: ['Album', 'EP', 'Single'] },
-      { k: 'handle', l: 'Shopify product handle', t: 'text', h: 'The end of the product URL, e.g. arirang' },
-      { k: 'shopUrl', l: 'Full Shopify link (optional)', t: 'url', h: 'Overrides the handle. Use for variants or bundles.' },
-      { k: 'musicUrl', l: 'Streaming link', t: 'url', h: 'Used when no Shopify store is set.' },
-      { k: 'image', l: 'Cover image', t: 'image', kind: 'cover' }] },
-    gallery: { label: 'Gallery', title: 'caption', sub: (i) => (i.category || 'Members') + ' · ' + i.member + (i.credit ? ' · ' + i.credit : ''), fields: [
-      { k: 'ytimport', t: 'ytimport' },
-      { k: 'member', l: 'Member / tag', t: 'text', req: 1, h: 'For example RM, Jung Kook or BTS for group photos.' },
-      { k: 'category', l: 'Category', t: 'select', o: ['Group', 'Members', 'Concert', 'Concept'] }, { k: 'caption', l: 'Caption', t: 'text', req: 1 },
-      { k: 'credit', l: 'Photo credit / source', t: 'text', h: 'Who took it or where it comes from. Shown with the photo.' },
-      { k: 'image', l: 'Photo (use only photos you have rights to)', t: 'image', kind: 'photo', req: 1 }] },
-    videos: { label: 'Videos', title: 'title', sub: (i) => `${i.type} · ${i.youtubeId ? 'plays on site' : 'link only'}`, fields: [
-      { k: 'type', l: 'Type', t: 'select', o: ['Music Video', 'Run BTS', 'Vlog'] },
-      { k: 'title', l: 'Title', t: 'text', req: 1 }, { k: 'meta', l: 'Channel / source', t: 'text' },
-      { k: 'youtubeId', l: 'YouTube link or ID', t: 'text', h: 'Paste the full link. The video then plays on the site and its thumbnail loads from YouTube.' },
-      { k: 'url', l: 'Other link (if no YouTube video)', t: 'url' },
-      { k: 'image', l: 'Custom thumbnail (optional)', t: 'image', kind: 'video' }] },
-    shop: { label: 'Shop', title: 'title', sub: (i) => i.note, fields: [
-      { k: 'title', l: 'Collection name', t: 'text', req: 1 }, { k: 'note', l: 'Short description', t: 'text' },
-      { k: 'handle', l: 'Shopify collection handle', t: 'text', h: 'The end of the collection URL, e.g. albums' }] },
-    faqs: { label: 'FAQs', title: 'q', sub: (i) => i.a.slice(0, 80), fields: [
-      { k: 'q', l: 'Question', t: 'text', req: 1 }, { k: 'a', l: 'Answer (blank line = new paragraph)', t: 'textarea', req: 1 }] }
+    albums: {
+      label: 'Albums', title: 'title', sub: (i) => `${i.type} · ${i.released || i.year}`, fields: [
+        { k: 'title', l: 'Title', t: 'text', req: 1 }, { k: 'year', l: 'Year', t: 'number', req: 1 },
+        { k: 'released', l: 'Release date (optional)', t: 'date', h: 'Shown on the card instead of the year.' },
+        { k: 'type', l: 'Type', t: 'select', o: ['Album', 'EP', 'Single'] },
+        { k: 'handle', l: 'Shopify product handle', t: 'text', h: 'The end of the product URL, e.g. arirang' },
+        { k: 'shopUrl', l: 'Full Shopify link (optional)', t: 'url', h: 'Overrides the handle. Use for variants or bundles.' },
+        { k: 'musicUrl', l: 'Streaming link', t: 'url', h: 'Used when no Shopify store is set.' },
+        { k: 'image', l: 'Cover image', t: 'image', kind: 'cover' }]
+    },
+    gallery: {
+      label: 'Gallery', title: 'caption', sub: (i) => (i.category || 'Members') + ' · ' + i.member + (i.credit ? ' · ' + i.credit : ''), fields: [
+        { k: 'ytimport', t: 'ytimport' },
+        { k: 'member', l: 'Member / tag', t: 'text', req: 1, h: 'For example RM, Jung Kook or BTS for group photos.' },
+        { k: 'category', l: 'Category', t: 'select', o: ['Group', 'Members', 'Concert', 'Concept'] }, { k: 'caption', l: 'Caption', t: 'text', req: 1 },
+        { k: 'credit', l: 'Photo credit / source', t: 'text', h: 'Who took it or where it comes from. Shown with the photo.' },
+        { k: 'image', l: 'Photo (use only photos you have rights to)', t: 'image', kind: 'photo', req: 1 }]
+    },
+    videos: {
+      label: 'Videos', title: 'title', sub: (i) => `${i.type} · ${i.youtubeId ? 'plays on site' : 'link only'}`, fields: [
+        { k: 'type', l: 'Type', t: 'select', o: ['Music Video', 'Run BTS', 'Vlog'] },
+        { k: 'title', l: 'Title', t: 'text', req: 1 }, { k: 'meta', l: 'Channel / source', t: 'text' },
+        { k: 'youtubeId', l: 'YouTube link or ID', t: 'text', h: 'Paste the full link. The video then plays on the site and its thumbnail loads from YouTube.' },
+        { k: 'url', l: 'Other link (if no YouTube video)', t: 'url' },
+        { k: 'image', l: 'Custom thumbnail (optional)', t: 'image', kind: 'video' }]
+    },
+    shop: {
+      label: 'Shop', title: 'title', sub: (i) => i.note, fields: [
+        { k: 'title', l: 'Collection name', t: 'text', req: 1 }, { k: 'note', l: 'Short description', t: 'text' },
+        { k: 'handle', l: 'Shopify collection handle', t: 'text', h: 'The end of the collection URL, e.g. albums' }]
+    },
+    faqs: {
+      label: 'FAQs', title: 'q', sub: (i) => i.a.slice(0, 80), fields: [
+        { k: 'q', l: 'Question', t: 'text', req: 1 }, { k: 'a', l: 'Answer (blank line = new paragraph)', t: 'textarea', req: 1 }]
+    }
   };
 
   /* [key, label, hint, type] — preview and bool settings are read from nested values below */
@@ -39,17 +49,24 @@
     ['siteName', 'Site name'], ['tagline', 'Tagline'],
     ['shopifyStore', 'Shopify store URL', 'https://your-store.myshopify.com (no trailing slash)'],
     ['fallbackShopUrl', 'Fallback shop URL'], ['heroAlbumId', 'Hero album', null, 'album'], ['heroBlurb', 'Hero text', null, 'area'],
-    ['previewYoutube', 'Hero preview: YouTube link or ID', 'The official video whose 25-second clip plays in the home banner. Leave empty to show the album cover instead.'],
-    ['previewStart', 'Hero preview starts at (seconds)', 'Example: 55 starts at 0:55. Pick the chorus.'],
-    ['previewLabel', 'Hero preview title', 'Example: SWIM'],
+    ['previewYoutube', 'Top banner preview: YouTube link or ID', 'The official video that plays in the big banner at the top of the home page. Leave empty to show the group photo instead.'],
+    ['previewStart', 'Top banner preview starts at (seconds)', 'Example: 55 starts at 0:55. Pick the chorus.'],
+    ['previewSeconds', 'Top banner preview length (seconds)', '10 to 120. Default 50.'],
+    ['previewLabel', 'Top banner preview title', 'Example: SWIM'],
+    ['preview2Youtube', 'Latest release preview: YouTube link or ID', 'A second official video, shown beside the latest release. Leave empty to show the album cover instead.'],
+    ['preview2Start', 'Latest release preview starts at (seconds)', 'Example: 50'],
+    ['preview2Seconds', 'Latest release preview length (seconds)', '10 to 120. Default 50.'],
+    ['preview2Label', 'Latest release preview title', 'Example: NORMAL'],
     ['autoApproveLetters', 'Publish fan letters without review?', 'Keep this on "No" unless you check the wall often.', 'bool'],
     ['contactEmail', 'Public contact email (shown on Contact, Terms, Privacy)'], ['operatorName', 'Site operator name (used in Terms and Privacy)'],
     ['jurisdiction', 'Governing law (country)'], ['legalUpdated', 'Terms/Privacy last updated (YYYY-MM-DD)'],
     ['social.x', 'X URL'], ['social.instagram', 'Instagram URL'], ['social.youtube', 'YouTube URL'], ['social.tiktok', 'TikTok URL']
   ];
+  const pv = (k, f, d) => (s) => { const o = s[k]; return o && o[f] != null && o[f] !== '' ? o[f] : d; };
   const READ = {
-    previewYoutube: (s) => (s.preview && s.preview.youtubeId) || '', previewStart: (s) => (s.preview && s.preview.start) || 0,
-    previewLabel: (s) => (s.preview && s.preview.label) || '', autoApproveLetters: (s) => String(!!s.autoApproveLetters)
+    previewYoutube: pv('preview', 'youtubeId', ''), previewStart: pv('preview', 'start', 0), previewSeconds: pv('preview', 'seconds', 50), previewLabel: pv('preview', 'label', ''),
+    preview2Youtube: pv('preview2', 'youtubeId', ''), preview2Start: pv('preview2', 'start', 0), preview2Seconds: pv('preview2', 'seconds', 50), preview2Label: pv('preview2', 'label', ''),
+    autoApproveLetters: (s) => String(!!s.autoApproveLetters)
   };
 
   let data = null, tab = 'albums', editing = null, draft = {}, flash = null;
@@ -143,8 +160,8 @@ ${tools}${form}
   <p class="mt-3" style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(l.message)}</p>
   <p class="label mt-3" style="color:var(--muted)">${esc(new Date(l.updatedAt || l.createdAt).toLocaleString())}</p>
   <div class="flex gap-2 mt-4">${l.status === 'approved'
-      ? `<button class="chip" data-act="unapprove" data-id="${l.id}">Hide from wall</button>`
-      : `<button class="chip" data-act="approve" data-id="${l.id}" style="border-color:var(--ok-line);color:var(--ok)">Approve</button>`}
+        ? `<button class="chip" data-act="unapprove" data-id="${l.id}">Hide from wall</button>`
+        : `<button class="chip" data-act="approve" data-id="${l.id}" style="border-color:var(--ok-line);color:var(--ok)">Approve</button>`}
     <button class="chip" data-act="dellet" data-id="${l.id}">Delete</button></div>
 </article>`).join('')}</div>`;
   }

@@ -6,7 +6,7 @@ An unofficial BTS fan site with a real backend. Node.js + Express, server-render
 
 | Area | Details |
 |---|---|
-| Pages | Home (galaxy hero, latest release with 25-second preview, **Meet BTS** member profiles, discography with type and year filters, photo gallery with category filters and lightbox, **ARMY Memories** timeline, videos, fan letters, shop), **About**, FAQ, Contact, Terms of Use, Privacy Policy, 404 |
+| Pages | Home (galaxy hero, two 50-second video previews, **Meet BTS** member profiles, discography with type and year filters, photo gallery with category filters and lightbox, **ARMY Memories** timeline, videos, fan letters, shop), **About**, FAQ, Contact, Terms of Use, Privacy Policy, 404 |
 | Theme | Dark and light mode, toggle at the top right of every page. Remembers the choice, follows the device until you pick, no flash on load |
 | Fan Letters | Visitors write, edit, rewrite and delete their own letters with a private edit code (no accounts). Every new or edited letter waits for your approval in `/admin` > Letters |
 | Icons | `favicon.ico` (16/32/48), SVG, Apple touch icon, Android/PWA icons (including maskable) and `site.webmanifest`. Regenerate with `npm run icons` |
@@ -58,8 +58,8 @@ Edit `lib/members.js`: stage name, real name, role, birth date and place, a shor
 ## Videos and the hero preview
 
 - `/admin` > Videos: paste a YouTube link. The ID is extracted, the video plays on the site and the real thumbnail loads. Without a link, the card opens a YouTube search so it never dead-ends.
-- Videos in the starter data were checked against YouTube to be uploads by the official channels (HYBE LABELS, BANGTANTV, Run BTS). "Hooligan" and "Body to Body" have no confirmed official link yet, so they open a YouTube search. Paste the exact link to turn them into playable cards.
-- Hero preview: `/admin` > Settings. Set the YouTube link, the start second (the starter value 55 is a guess, so open the video and pick the chorus) and the title. It plays exactly 25 seconds and loads only after a click.
+- Videos in the starter data were checked against YouTube to be uploads by the official channels (HYBE LABELS, BANGTANTV, Run BTS). "Hooligan" now plays (ID from a Soompi article, unverified against YouTube). "Body to Body" has no confirmed official video, so it opens a YouTube search. Paste the exact link to turn them into playable cards.
+- Two previews: the top banner and the latest release. `/admin` > Settings. Set the YouTube link, the start second (the starter value 55 is a guess, so open the video and pick the chorus) and the title. It plays 50 seconds by default (changeable) and loads only after a click.
 
 ## Fan Letters
 
@@ -114,3 +114,7 @@ The Terms and Privacy pages are written to match what this site actually does (c
 - Keep the "not affiliated" notice visible.
 - Sell only licensed merchandise in your Shopify store.
 - Respond quickly to removal requests (the Contact form has a topic for it).
+
+## Fan letter frames
+
+14 frames and 12 starter templates. Frames are CSS classes `.fr-<id>` in `src/input.css`, listed in `lib/frames.js`; templates are in the same file. Add one in both places and run `npm run build`.

@@ -26,10 +26,14 @@ const monthYear = (iso) => new Date(iso + 'T00:00:00Z').toLocaleDateString('en-G
 const ytThumb = (id, q = 'maxresdefault') => `https://i.ytimg.com/vi/${id}/${q}.jpg`;
 const isPlaceholder = (p) => String(p).startsWith('/img/seed/');
 
-function albumCard(a, s) {
+function albumCard(a, s, vids) {
+  // No real cover yet: use a frame from the song's official video, if there is one, instead of generated art.
+  const mv = isPlaceholder(a.image) && (vids || []).find((v) => v.youtubeId && v.type === 'Music Video' && v.title.toLowerCase().includes(a.title.toLowerCase()));
+  const src = mv ? ytThumb(mv.youtubeId, 'hqdefault') : a.thumb || a.image;
+  const fb = mv ? ` data-fallback="${esc(a.thumb || a.image)}"` : '';
   return `
 <article class="album" data-type="${esc(a.type)}" data-year="${esc(a.year)}" data-text="${esc(`${a.title} ${a.year} ${a.type}`.toLowerCase())}">
-  <div class="art skel"><img class="fade" src="${esc(a.thumb || a.image)}" alt="${esc(a.title)} cover art" loading="lazy" decoding="async" width="${a.width || 900}" height="${a.height || 900}"></div>
+  <div class="art skel"><img class="fade" src="${esc(src)}"${fb} alt="${esc(a.title)} cover art" loading="lazy" decoding="async" width="${a.width || 900}" height="${a.height || 900}"></div>
   <div class="p-4 flex flex-col gap-3 flex-1">
     <div class="flex items-center justify-between gap-2"><span class="label" style="color:var(--violet-hi)">${esc(a.type)}</span><span class="label" style="color:var(--muted)">${esc(a.released ? monthYear(a.released) : a.year)}</span></div>
     <h3 class="display text-base md:text-lg font-bold leading-snug">${esc(a.title)}</h3>
@@ -70,18 +74,19 @@ function videoCard(v) {
 </article>`;
 }
 
-function heroPreview(pv, hero) {
-  const id = pv.youtubeId, label = pv.label || 'the new single';
+/* One preview player. `cover` is the album the song belongs to (small corner image); `lazy` for the one below the fold. */
+function heroPreview(pv, cover, lazy) {
+  const id = pv.youtubeId, label = pv.label || 'the new single', secs = Math.max(10, Math.min(120, +pv.seconds || 50));
   return `
-<div class="preview" id="preview" data-yt="${esc(id)}" data-start="${esc(pv.start || 0)}" data-seconds="25">
-  <div class="preview-ring"><div class="preview-frame" id="preview-frame">
-    <img class="pv-thumb" src="${ytThumb(id)}" data-fallback="${esc([ytThumb(id, 'hqdefault'), hero && hero.image].filter(Boolean).join(' '))}" alt="Still from the official ${esc(label)} music video" width="1280" height="720" loading="lazy">
-    ${hero ? `<img class="pv-cover" src="${esc(hero.thumb || hero.image)}" alt="${esc(hero.title)} cover art" width="200" height="200">` : ''}
-    <button class="pv-play" id="pv-play" type="button" aria-label="Play a 25-second preview of ${esc(label)}"><span class="dot">${PLAY_S}</span><span id="pv-play-text">Play 25s preview</span></button>
+<div class="preview" data-yt="${esc(id)}" data-start="${esc(pv.start || 0)}" data-seconds="${secs}" style="--dur:${secs}s">
+  <div class="preview-ring"><div class="preview-frame">
+    <img class="pv-thumb" src="${ytThumb(id)}" data-fallback="${esc([ytThumb(id, 'hqdefault'), cover && cover.image].filter(Boolean).join(' '))}" alt="Still from the official ${esc(label)} music video" width="1280" height="720"${lazy ? ' loading="lazy"' : ' fetchpriority="high"'}>
+    ${cover ? `<img class="pv-cover" src="${esc(cover.thumb || cover.image)}" alt="${esc(cover.title)} cover art" width="200" height="200">` : ''}
+    <button class="pv-play" type="button" aria-label="Play a ${secs}-second preview of ${esc(label)}"><span class="dot">${PLAY_S}</span><span class="pv-play-text">Play ${secs}s preview</span></button>
   </div></div>
   <div class="eq" aria-hidden="true">${'<span></span>'.repeat(30)}</div>
-  <div class="pv-meta"><span class="label" style="color:var(--violet-hi)">${esc(label)} &middot; official MV preview</span><span class="label" id="pv-time" style="color:var(--muted)">0:25</span></div>
-  <div class="pv-bar" aria-hidden="true"><i id="pv-fill"></i></div>
+  <div class="pv-meta"><span class="label" style="color:var(--violet-hi)">${esc(label)} &middot; official MV preview</span><span class="label pv-time" style="color:var(--muted)">${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</span></div>
+  <div class="pv-bar" aria-hidden="true"><i class="pv-fill"></i></div>
 </div>`;
 }
 
@@ -148,16 +153,23 @@ function home(ctx, db) {
   const hero = db.albums.find((a) => a.id === s.heroAlbumId) || db.albums[0];
   const heroUrl = hero ? albumUrl(hero, s) : safeUrl(s.fallbackShopUrl) || '#';
   const heroTitle = hero ? hero.title : s.siteName;
-  const pv = s.preview && s.preview.youtubeId ? s.preview : null;
-  const right = pv
-    ? heroPreview(pv, hero)
+  const byTitle = (label) => db.albums.find((x) => x.title.toLowerCase() === String(label || '').toLowerCase());
+  const pv = s.preview && s.preview.youtubeId ? s.preview : null;          // top banner player
+  const pv2 = s.preview2 && s.preview2.youtubeId ? s.preview2 : null;      // latest release player
+  const heroRight = pv
+    ? heroPreview(pv, byTitle(pv.label), false)
+    : '<figure class="hero-photo min-w-0"><img src="/img/fan/hero-group.webp" alt="The seven members of BTS standing on a mirror-like lake under a purple, starry sky" width="836" height="626" fetchpriority="high" decoding="async"></figure>';
+  const right = pv2
+    ? heroPreview(pv2, hero, true)
     : hero ? `<div class="cover-frame"><img src="${esc(hero.image)}" alt="${esc(hero.title)} cover art" width="${hero.width || 900}" height="${hero.height || 900}"></div>` : '';
+  // The featured release already has its own section, so the grid starts with the next one.
+  const gridAlbums = db.albums.filter((a) => a !== hero);
 
   const gcat = (g) => g.category || 'Members';
   const photos = db.gallery.map((g) => shot({ type: gcat(g), label: gcat(g), image: g.image, thumb: g.thumb, width: g.width, height: g.height, caption: g.caption, credit: g.credit, text: `${g.member} ${gcat(g)} ${g.caption}` }));
   // Generated placeholders are left out of the gallery; real covers appear as soon as they are imported or uploaded.
   const covers = db.albums.filter((a) => !isPlaceholder(a.image)).map((a) => shot({ type: 'Covers', label: 'Album cover', image: a.image, thumb: a.thumb, width: a.width, height: a.height, caption: `${a.title} cover art (${a.year})`, credit: '', text: `cover ${a.title} ${a.year} ${a.type}` }));
-  const years = [...new Set(db.albums.map((a) => a.year))].sort((x, y) => y - x);
+  const years = [...new Set(gridAlbums.map((a) => a.year))].sort((x, y) => y - x);
   const cats = ['Group', 'Members', 'Concert', 'Concept'].filter((c) => db.gallery.some((g) => gcat(g) === c));
 
   const body = `
@@ -176,9 +188,7 @@ function home(ctx, db) {
         </div>
         <p class="mt-8 counter label" title="Counted from the debut on 13 June 2013"><span style="color:var(--muted)">Debut day</span> <b id="debut-days">D+4,900</b></p>
       </div>
-      <figure class="hero-photo min-w-0">
-        <img src="/img/fan/hero-group.webp" alt="The seven members of BTS standing on a mirror-like lake under a purple, starry sky" width="836" height="626" fetchpriority="high" decoding="async">
-      </figure>
+      <div class="min-w-0">${heroRight}</div>
     </div>
   </div>
 </section>
@@ -207,8 +217,9 @@ function home(ctx, db) {
 <section id="music" class="section"><div class="wrap">
   ${head('Discography', 'Music &amp; Albums', `<div class="flex flex-wrap items-end gap-3">${chips('music-filters', 'Filter by release type', [['all', 'All'], ['Album', 'Albums'], ['EP', 'EPs'], ['Single', 'Singles']])}
     <label class="year-pick label" for="album-year"><span>Year</span><select id="album-year" aria-label="Filter by release year"><option value="all">All years</option>${years.map((y) => `<option>${y}</option>`).join('')}</select></label></div>`)}
-  <div id="album-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">${db.albums.map((a) => albumCard(a, s)).join('')}</div>
+  <div id="album-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">${gridAlbums.map((a) => albumCard(a, s, db.videos)).join('')}</div>
   <div id="album-empty" class="empty" hidden>No releases match your search.</div>
+  ${hero ? `<p class="mt-6 text-sm" style="color:var(--muted)">Latest release <a class="link" href="#latest">${esc(hero.title)}</a> is featured above.</p>` : ''}
 </div></section>
 
 <section id="gallery" class="section"><div class="wrap">
@@ -277,7 +288,7 @@ ${MEMBERS.map(memberDialog).join('')}
   return {
     title: 'ARMY Hub: Welcome to ARMY Universe, a BTS Fan Site',
     description: `Unofficial BTS fan site. Meet all seven members, browse the discography and album covers, photo gallery, music videos, Run BTS episodes and fan letters.${hero ? ` Latest: ${hero.title}.` : ''}`,
-    path: '/', body, jsonld, scripts: ['/js/letters.js'], preload: ['/img/fan/hero-group.webp']
+    path: '/', body, jsonld, scripts: ['/js/letters.js'], preload: pv ? [ytThumb(pv.youtubeId)] : ['/img/fan/hero-group.webp']
   };
 }
 

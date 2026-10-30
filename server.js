@@ -180,7 +180,7 @@ const codeOk = (l, code) => {
   const a = Buffer.from(l.codeHash, 'hex'), b = Buffer.from(sha256(normCode(code)), 'hex');
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 };
-const ownLetter = (l) => ({ id: l.id, nickname: l.nickname, country: l.country, to: l.to, message: l.message, status: l.status, createdAt: l.createdAt });
+const ownLetter = (l) => ({ id: l.id, nickname: l.nickname, country: l.country, to: l.to, message: l.message, frame: l.frame || 'classic', status: l.status, createdAt: l.createdAt });
 const letterCreate = rateLimit({ windowMs: 60 * 60 * 1000, limit: 3, standardHeaders: true, legacyHeaders: false, message: { error: 'You have sent several letters already. Please try again later.' } });
 const letterEdit = rateLimit({ windowMs: 15 * 60 * 1000, limit: 30, standardHeaders: true, legacyHeaders: false, message: { error: 'Too many attempts. Please wait a few minutes.' } });
 
@@ -432,7 +432,7 @@ function cleanUploads() {
     for (const f of files) {
       if (f === '.gitkeep' || used.has(f)) continue;
       const p = path.join(UPLOADS, f);
-      fs.stat(p, (er, st) => { if (!er && Date.now() - st.mtimeMs > 10 * 60 * 1000) fs.unlink(p, () => {}); });
+      fs.stat(p, (er, st) => { if (!er && Date.now() - st.mtimeMs > 10 * 60 * 1000) fs.unlink(p, () => { }); });
     }
   });
 }

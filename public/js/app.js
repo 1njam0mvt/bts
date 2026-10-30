@@ -222,12 +222,12 @@
     if (img.complete) { if (img.naturalWidth === 0) fail(); else loaded(); }
   });
 
-  /* ---------- Hero: 25-second animated preview of the official video ---------- */
-  const pv = $('#preview');
-  if (pv) {
-    const id = pv.dataset.yt, start = +pv.dataset.start || 0, secs = +pv.dataset.seconds || 25;
-    const frame = $('#preview-frame'), btn = $('#pv-play'), txt = $('#pv-play-text'), fill = $('#pv-fill'), time = $('#pv-time');
-    const fmt = (n) => '0:' + String(Math.max(0, n)).padStart(2, '0');
+  /* ---------- Animated preview players (home banner and latest release). Only one plays at a time. ---------- */
+  const players = [];
+  $$('.preview').forEach((pv) => {
+    const id = pv.dataset.yt, start = +pv.dataset.start || 0, secs = +pv.dataset.seconds || 50;
+    const frame = $('.preview-frame', pv), btn = $('.pv-play', pv), txt = $('.pv-play-text', pv), fill = $('.pv-fill', pv), time = $('.pv-time', pv);
+    const fmt = (n) => Math.floor(Math.max(0, n) / 60) + ':' + String(Math.max(0, n) % 60).padStart(2, '0');
     let timer = null, tick = null, iframe = null, stopBtn = null;
     const stop = () => {
       clearTimeout(timer); clearInterval(tick);
@@ -235,9 +235,11 @@
       if (stopBtn) stopBtn.remove();
       iframe = stopBtn = null;
       pv.classList.remove('playing'); fill.classList.remove('run');
-      time.textContent = fmt(secs); btn.hidden = false; txt.textContent = 'Replay 25s preview';
+      time.textContent = fmt(secs); btn.hidden = false; txt.textContent = `Replay ${secs}s preview`;
     };
+    players.push(stop);
     btn.addEventListener('click', () => {
+      players.forEach((p) => { if (p !== stop) p(); });
       btn.hidden = true;
       iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&start=${start}&end=${start + secs}&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=0`;
@@ -250,10 +252,10 @@
       stopBtn.addEventListener('click', stop);
       frame.appendChild(stopBtn);
       pv.classList.add('playing');
-      void fill.offsetWidth; fill.classList.add('run');                 // restart the 25 s progress bar
+      void fill.offsetWidth; fill.classList.add('run');                 // restart the progress bar
       let left = secs; time.textContent = fmt(left);
       tick = setInterval(() => { left--; time.textContent = fmt(left); }, 1000);
       timer = setTimeout(stop, secs * 1000 + 800);                      // YouTube stops at `end`; this restores the poster
     });
-  }
+  });
 })();

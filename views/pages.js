@@ -194,7 +194,7 @@ function privacy(ctx, db) {
 <p>Some features load content from other companies. When that happens, your browser connects to them directly and they may receive your IP address and device details.</p>
 <ul>
 <li><strong>Google Fonts</strong> supplies the typefaces used on every page.</li>
-<li><strong>YouTube.</strong> Video previews may be loaded from YouTube's image servers. Video players, including the 25-second preview in the home banner, are loaded only after you click play, using YouTube's privacy-enhanced mode.</li>
+<li><strong>YouTube.</strong> Video previews may be loaded from YouTube's image servers. Video players, including the 50-second previews on the home page, are loaded only after you click play, using YouTube's privacy-enhanced mode.</li>
 <li><strong>Streaming services and stores</strong> (for example Spotify, Weverse Shop and Shopify stores). When you click an outbound link you leave this Site, and that service's own privacy policy applies.</li>
 </ul>
 
