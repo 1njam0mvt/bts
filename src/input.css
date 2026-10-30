@@ -1997,3 +1997,17 @@ dialog.mdlg::backdrop {
 .letter {
   min-height: 11rem;
 }
+
+/* YouTube thumbnails often carry black bars baked in at the top and bottom. Zoom slightly; the box clips the edges. */
+img.yt {
+  transform: scale(1.1);
+  transform-origin: center;
+}
+
+.video:hover .thumb img.yt {
+  transform: scale(1.14);
+}
+
+.video .thumb img.yt {
+  transition: transform .5s;
+}

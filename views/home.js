@@ -33,7 +33,7 @@ function albumCard(a, s, vids) {
   const fb = mv ? ` data-fallback="${esc(a.thumb || a.image)}"` : '';
   return `
 <article class="album" data-type="${esc(a.type)}" data-year="${esc(a.year)}" data-text="${esc(`${a.title} ${a.year} ${a.type}`.toLowerCase())}">
-  <div class="art skel"><img class="fade" src="${esc(src)}"${fb} alt="${esc(a.title)} cover art" loading="lazy" decoding="async" width="${a.width || 900}" height="${a.height || 900}"></div>
+  <div class="art skel"><img class="fade${mv ? ' yt' : ''}" src="${esc(src)}"${fb} alt="${esc(a.title)} cover art" loading="lazy" decoding="async" width="${a.width || 900}" height="${a.height || 900}"></div>
   <div class="p-4 flex flex-col gap-3 flex-1">
     <div class="flex items-center justify-between gap-2"><span class="label" style="color:var(--violet-hi)">${esc(a.type)}</span><span class="label" style="color:var(--muted)">${esc(a.released ? monthYear(a.released) : a.year)}</span></div>
     <h3 class="display text-base md:text-lg font-bold leading-snug">${esc(a.title)}</h3>
@@ -58,7 +58,7 @@ function videoCard(v) {
   const link = videoLink(v);
   const src = custom ? v.image : hasId ? ytThumb(v.youtubeId) : v.image;
   const fallback = hasId && !custom ? [ytThumb(v.youtubeId, 'hqdefault'), v.image].filter(Boolean).join(' ') : '';
-  const img = `<img src="${esc(src)}" ${fallback ? `data-fallback="${esc(fallback)}" ` : ''}alt="" loading="lazy" decoding="async" width="960" height="540"><span class="play"><span>${PLAY}</span></span>`;
+  const img = `<img${hasId && !custom ? ' class="yt"' : ''} src="${esc(src)}" ${fallback ? `data-fallback="${esc(fallback)}" ` : ''}alt="" loading="lazy" decoding="async" width="960" height="540"><span class="play"><span>${PLAY}</span></span>`;
   const media = hasId
     ? `<button class="thumb" type="button" data-embed="${esc(v.youtubeId)}" aria-label="Play ${esc(v.title)}">${img}</button>`
     : `<a class="thumb" href="${esc(link)}" target="_blank" rel="noopener noreferrer" aria-label="Find ${esc(v.title)} on YouTube">${img}</a>`;
@@ -80,7 +80,7 @@ function heroPreview(pv, cover, lazy) {
   return `
 <div class="preview" data-yt="${esc(id)}" data-start="${esc(pv.start || 0)}" data-seconds="${secs}" style="--dur:${secs}s">
   <div class="preview-ring"><div class="preview-frame">
-    <img class="pv-thumb" src="${ytThumb(id)}" data-fallback="${esc([ytThumb(id, 'hqdefault'), cover && cover.image].filter(Boolean).join(' '))}" alt="Still from the official ${esc(label)} music video" width="1280" height="720"${lazy ? ' loading="lazy"' : ' fetchpriority="high"'}>
+    <img class="pv-thumb yt" src="${ytThumb(id)}" data-fallback="${esc([ytThumb(id, 'hqdefault'), cover && cover.image].filter(Boolean).join(' '))}" alt="Still from the official ${esc(label)} music video" width="1280" height="720"${lazy ? ' loading="lazy"' : ' fetchpriority="high"'}>
     ${cover ? `<img class="pv-cover" src="${esc(cover.thumb || cover.image)}" alt="${esc(cover.title)} cover art" width="200" height="200">` : ''}
     <button class="pv-play" type="button" aria-label="Play a ${secs}-second preview of ${esc(label)}"><span class="dot">${PLAY_S}</span><span class="pv-play-text">Play ${secs}s preview</span></button>
   </div></div>
