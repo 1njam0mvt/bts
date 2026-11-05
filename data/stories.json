@@ -1,0 +1,26 @@
+[
+  {
+    "id": "s1",
+    "category": "Loneliness",
+    "label": "fictional",
+    "body": "New city, new school, and nobody who knew my name. I played the same song on the long bus ride every morning, and somewhere in the second week I noticed the girl next to me was humming it too. We have not stopped talking since."
+  },
+  {
+    "id": "s2",
+    "category": "Coming-of-age",
+    "label": "fictional",
+    "body": "I used to hide my playlist when friends came over. The day I finally let it play out loud, two of them knew every word. Turns out half my class had been hiding the same thing."
+  },
+  {
+    "id": "s3",
+    "category": "Healing",
+    "label": "fictional",
+    "body": "Some evenings are heavy for no reason I can explain. On those evenings I put on something slow, make tea, and let it be enough to simply get to bedtime. Getting through the day counts."
+  },
+  {
+    "id": "s4",
+    "category": "Joy",
+    "label": "fictional",
+    "body": "My cousin and I learned a whole dance from a video over one summer, tripping over each other in the living room. We were terrible. It is still my favourite memory of that year."
+  }
+]
