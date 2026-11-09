@@ -140,6 +140,12 @@ function layout(ctx, page) {
 <meta name="robots" content="${page.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'}">
 <meta name="google-site-verification" content="cS-nZOsOb-dKYry8yz7e4_qhqMKMLLbsa6I-o8kpB1A">
 <meta name="theme-color" content="#0b0714">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WPD4LFPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
 <script src="${asset('/js/theme.js')}"></script>
 <link rel="canonical" href="${esc(url)}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">

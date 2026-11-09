@@ -55,7 +55,7 @@ app.use(helmet({
     useDefaults: false,
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'https://www.youtube.com'],   // youtube.com: the music tray loads the YouTube player API, only after a visitor presses play
+      scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.youtube.com', 'https://www.googletagmanager.com'],   // youtube.com: the music tray loads the YouTube player API, only after a visitor presses play. googletagmanager.com: analytics.
       styleSrc: ["'self'", 'https://fonts.googleapis.com'],
       styleSrcAttr: ["'unsafe-inline'"],
       fontSrc: ['https://fonts.gstatic.com'],
