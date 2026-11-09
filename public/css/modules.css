@@ -796,17 +796,13 @@ html[data-reduce-motion="true"] *::before {
   object-position: 50% 40%;
   z-index: -1;
   /* above .hero-bg (-3) and the gradient (::before, -2), below the content */
-  opacity: 0;
+  opacity: .5;
   mix-blend-mode: screen;
   pointer-events: none;
   transition: opacity 1.2s ease;
   filter: brightness(1.25) contrast(1.1);
   -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, .55) 0%, #000 55%);
   mask-image: linear-gradient(90deg, rgba(0, 0, 0, .55) 0%, #000 55%);
-}
-
-.hero .hero-ascii.is-on {
-  opacity: .5;
 }
 
 .hero canvas {
@@ -823,7 +819,7 @@ html[data-reduce-motion="true"] *::before {
     mask-image: none;
   }
 
-  .hero .hero-ascii.is-on {
+  .hero .hero-ascii {
     opacity: .4;
   }
 }
