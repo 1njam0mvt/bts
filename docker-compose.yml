@@ -1,0 +1,19 @@
+# Local / self-hosted run: docker compose up --build
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # change to your real domain so sitemap.xml / robots.txt are correct
+      - SITE_URL=http://localhost:3000
+      # admin login for /admin
+      - ADMIN_PASSWORD=change-me-please
+      # keep letters, messages, settings and uploaded images on the volume
+      - DATA_DIR=/var/data
+      - UPLOAD_DIR=/var/data/uploads
+    volumes:
+      - armyhub-data:/var/data
+volumes:
+  armyhub-data:

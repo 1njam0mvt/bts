@@ -1,0 +1,31 @@
+# Render Blueprint: deploy the whole site with one click.
+# Push this repo to GitHub, then in Render: New + > Blueprint > pick this repository.
+services:
+  - type: web
+    name: army-hub
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Set this to your own domain (or Render URL) once known — sitemap.xml and robots.txt use it.
+      - key: SITE_URL
+        sync: false
+      # Admin login for /admin. Generate one: openssl rand -base64 18
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      # JSON store lives on a writable disk so letters, messages and settings survive restarts.
+      # Free plans cannot mount disks; use a paid instance type if you need persistence.
+      - key: DATA_DIR
+        value: /var/data
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+    disk:
+      name: army-hub-data
+      mountPath: /var/data
+      sizeGB: 1

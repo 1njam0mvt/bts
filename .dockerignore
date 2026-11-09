@@ -1,0 +1,15 @@
+node_modules
+uploads
+data/*.json
+!data/seed.json
+!data/stories.json
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.log
+Dockerfile
+.dockerignore
+tests
+scripts/icons.js
