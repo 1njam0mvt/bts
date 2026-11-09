@@ -827,13 +827,3 @@ html[data-reduce-motion="true"] *::before {
     opacity: .4;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero .hero-ascii {
-    display: none;
-  }
-}
-
-html[data-reduce-motion="true"] .hero .hero-ascii {
-  display: none;
-}
