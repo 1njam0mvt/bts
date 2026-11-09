@@ -138,6 +138,7 @@ function layout(ctx, page) {
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
 <meta name="robots" content="${page.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'}">
+<meta name="google-site-verification" content="cS-nZOsOb-dKYry8yz7e4_qhqMKMLLbsa6I-o8kpB1A">
 <meta name="theme-color" content="#0b0714">
 <script src="${asset('/js/theme.js')}"></script>
 <link rel="canonical" href="${esc(url)}">
