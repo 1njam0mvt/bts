@@ -208,7 +208,8 @@ function home(ctx, db) {
   const body = `
 <section id="home" class="hero">
   <img class="hero-bg" src="/img/fan/galaxy.webp" alt="" width="1600" height="715" aria-hidden="true" fetchpriority="low" decoding="async">
-  <video class="hero-ascii" data-src="/video/hero-ascii.mp4" poster="/img/hero-ascii-poster.webp" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
+  <video class="hero-ascii" src="/video/hero-ascii.mp4" poster="/img/hero-ascii-poster.webp" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true"></video>
+  <button type="button" class="hero-ascii-toggle" aria-pressed="false" aria-label="Pause background animation" hidden>Pause</button>
   <canvas id="lightsea" aria-hidden="true"></canvas>
   <div class="wrap relative">
     <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-10 lg:gap-14 items-center py-12 lg:py-20">
