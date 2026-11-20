@@ -1,4 +1,6 @@
 'use strict';
+const seo = require('../lib/seo');
+const seoViews = require('./seo');
 /* Home page, rendered on the server so crawlers (and visitors without JS) see every member, album,
    photo, video and letter. public/js/app.js only adds behaviour.
    Order: hero, latest release (with the 25-second preview), members, albums, gallery,
@@ -285,6 +287,23 @@ ${letters.section(db)}
   </div>
 </div></section>
 
+<section id="about-army" class="section" style="border-top:1px solid var(--line)"><div class="wrap">
+  <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-10 lg:gap-14">
+    <div class="min-w-0">
+      <p class="label" style="color:var(--violet-hi)">BTS ARMY Hub</p>
+      <h2 class="section-title mt-2">The unofficial hub for BTS ARMY, wherever you are</h2>
+      <p class="mt-4 max-w-xl" style="color:var(--muted)">BTS ARMY Hub is a fan-made place for Indian BTS ARMY, US BTS ARMY and ARMY everywhere to browse the members, albums, photos, videos and fan letters. It is not official and not affiliated with BTS or BIGHIT MUSIC.</p>
+      <ul class="mt-6 grid gap-2">
+        <li><a class="link" href="/what-is-bts-army">What is BTS ARMY? Meaning and how to join</a></li>
+        <li><a class="link" href="/bts-army-india">BTS ARMY India: guide for Indian ARMY</a></li>
+        <li><a class="link" href="/bts-army-usa">US BTS ARMY: guide for ARMY in the United States</a></li>
+        <li><a class="link" href="/tour">Tour safety: avoid ticket scams</a></li>
+      </ul>
+    </div>
+    <div class="min-w-0">${seoViews.faqBlock(seo.HOME_FAQ)}</div>
+  </div>
+</div></section>
+
 ${MEMBERS.map(memberDialog).join('')}
 
 <dialog id="lightbox" class="lightbox" aria-label="Image viewer">
@@ -305,7 +324,20 @@ ${MEMBERS.map(memberDialog).join('')}
   const base = ctx.base;
   const abs = (p) => (/^https?:/.test(p) ? p : base + p);
   const jsonld = [
-    { '@context': 'https://schema.org', '@type': 'WebSite', name: s.siteName, url: base + '/', description: s.tagline, inLanguage: 'en' },
+    {
+      '@context': 'https://schema.org', '@type': 'WebSite', '@id': base + '/#website', name: s.siteName, alternateName: seo.BRAND_NAMES.filter((n) => n !== s.siteName), url: base + '/',
+      description: s.tagline, inLanguage: 'en', keywords: seo.KEYWORDS.join(', '), publisher: { '@id': base + '/#organization' },
+      potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: base + '/?q={search_term_string}' }, 'query-input': 'required name=search_term_string' }
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'Organization', '@id': base + '/#organization', name: s.siteName, alternateName: seo.BRAND_NAMES.filter((n) => n !== s.siteName), url: base + '/',
+      logo: { '@type': 'ImageObject', url: base + '/icon-512.png', width: 512, height: 512 }, image: base + '/icon-512.png',
+      description: 'An unofficial, fan-made website for BTS ARMY. Not affiliated with BTS, BIGHIT MUSIC or HYBE.',
+      slogan: 'The unofficial fan hub for ARMY', knowsAbout: ['BTS', 'BTS ARMY', 'Indian BTS ARMY', 'US BTS ARMY', 'K-pop'],
+      ...(s.contactEmail ? { email: s.contactEmail } : {}), ...(s.operatorName ? { founder: { '@type': 'Person', name: s.operatorName } } : {}),
+      contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', url: base + '/contact', availableLanguage: ['en'] }
+    },
+    seoViews.faqLd(seo.HOME_FAQ),
     {
       '@context': 'https://schema.org', '@type': 'ItemList', name: 'Members of BTS',
       itemListElement: MEMBERS.map((m, i) => ({ '@type': 'ListItem', position: i + 1, item: { '@type': 'Person', name: m.name, alternateName: m.stage, image: abs(m.image), description: m.bio, memberOf: { '@type': 'MusicGroup', name: 'BTS' } } }))
@@ -325,8 +357,8 @@ ${MEMBERS.map(memberDialog).join('')}
   });
 
   return {
-    title: 'ARMY Hub: Welcome to ARMY Universe, a BTS Fan Site',
-    description: `Unofficial BTS fan site. Meet all seven members, browse the discography and album covers, photo gallery, music videos, Run BTS episodes and fan letters.${hero ? ` Latest: ${hero.title}.` : ''}`,
+    title: 'BTS ARMY Hub: Unofficial BTS Fan Site for ARMY',
+    description: `BTS ARMY Hub is an unofficial BTS fan site for ARMY in India, the US and worldwide: seven members, discography, gallery, videos and fan letters.${hero ? ` Latest: ${hero.title}.` : ''}`,
     path: '/', body, jsonld, scripts: ['/js/letters.js', '/js/carousel.js', '/js/door.js', '/js/hero-ascii.js'], preload: pv ? [ytThumb(pv.youtubeId)] : ['/img/fan/hero-group.webp']
   };
 }

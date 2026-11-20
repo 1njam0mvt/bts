@@ -19,6 +19,7 @@ const hero = (eyebrow, title, lead) => `
 
 /* ---------- About ---------- */
 function about(ctx, db) {
+  const s = db.settings;
   const body = `${hero('About', 'About ARMY Hub', 'A fan-made corner of the internet for people who love BTS and each other.')}
 <section class="section" style="border-top:1px solid var(--line)"><div class="wrap">
   <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
@@ -44,13 +45,25 @@ function about(ctx, db) {
       <p>Member profiles use widely published facts. For anything official, please use the <a class="link" href="https://bts.ibighit.com/eng/" target="_blank" rel="noopener noreferrer">official BTS website</a>.</p>
     </div>
   </div>
+  <div class="prose-legal mt-10 max-w-3xl">
+    <h2>Who runs ARMY Hub</h2>
+    <p>${s.operatorName ? `ARMY Hub is run by ${esc(s.operatorName)}, a BTS fan.` : 'ARMY Hub is run by a BTS fan, with no connection to the artists or their company.'} ${s.contactEmail ? `You can reach us at ${esc(s.contactEmail)} or through the <a class="link" href="/contact">contact form</a>.` : 'You can reach us through the <a class="link" href="/contact">contact form</a>.'}</p>
+    <h2>How we check what we publish</h2>
+    <ul>
+      <li>Facts about BTS come from official channels and widely reported sources, and our guides list their sources and a “last reviewed” date: <a class="link" href="/what-is-bts-army">What is BTS ARMY?</a>, <a class="link" href="/bts-army-india">BTS ARMY India</a> and <a class="link" href="/bts-army-usa">BTS ARMY USA</a>.</li>
+      <li>Tour and ticket details change often, so we say “as announced” and send you to the official channels. Offers we cannot confirm are marked “not yet confirmed” on the <a class="link" href="/tour">Tour safety</a> page.</li>
+      <li>We do not publish made-up reviews, fake stats or private information about anyone.</li>
+    </ul>
+    <h2>Corrections and removals</h2>
+    <p>If something is wrong or something of yours should come down, <a class="link" href="/contact">tell us</a>. We correct mistakes and note the change on the page.</p>
+  </div>
   <div class="mt-10 flex flex-wrap gap-3"><a class="btn btn-primary" href="/#members">Explore BTS</a><a class="btn btn-ghost" href="/contact">Contact us</a><a class="btn btn-ghost" href="/faq">Read the FAQ</a></div>
 </div></section>`;
   return {
-    title: 'About ARMY Hub: An Unofficial BTS Fan Site',
+    title: 'About BTS ARMY Hub: An Unofficial BTS Fan Site',
     description: 'ARMY Hub is a fan-made BTS site with member profiles, albums, a photo gallery, videos and fan letters. It is not affiliated with BTS or BIGHIT MUSIC.',
     path: '/about', body,
-    jsonld: [crumbs(ctx, 'About', '/about')]
+    jsonld: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About BTS ARMY Hub', url: ctx.base + '/about', inLanguage: 'en', about: { '@type': 'Organization', '@id': ctx.base + '/#organization', name: (db.settings || {}).siteName || 'ARMY Hub' } }, crumbs(ctx, 'About', '/about')]
   };
 }
 
@@ -242,7 +255,7 @@ function notFound() {
 /* ---------- Admin shell (the UI lives in public/js/admin.js) ---------- */
 function adminShell(asset) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin | ARMY Hub</title><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0b0714"><script src="${asset('/js/theme.js')}"></script><link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Admin | ARMY Hub</title><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0b0714"><script src="${asset('/js/theme.js')}"></script><link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any"><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Unbounded:wght@500;700;900&display=swap">
 <link rel="stylesheet" href="${asset('/css/site.css')}"></head>
 <body><div class="wrap py-8"><div id="admin"><p style="color:var(--muted)">Loading admin&hellip;</p></div></div>

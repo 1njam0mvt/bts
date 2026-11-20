@@ -1,4 +1,5 @@
 'use strict';
+const seo = require('../lib/seo');
 /* Shared page shell: <head> SEO tags, header, footer. Every public page goes through layout(). */
 const { esc, safeUrl } = require('../lib/util');
 const { MEMBERS } = require('../lib/members');
@@ -113,7 +114,7 @@ function footer(ctx) {
         <p><strong style="color:var(--fg)">This is an unofficial fan-made website and is not affiliated with or endorsed by BTS or BIGHIT MUSIC.</strong></p>
         <p>All names, images, logos and trademarks belong to their respective owners. &copy; ${new Date().getFullYear()} ${esc(s.siteName)}, a fan project. <a class="link" href="/contact">Request a removal</a></p>
       </div>
-      <ul class="flex flex-wrap gap-x-5 gap-y-1 items-start"><li><a class="foot-link" href="/tour">Tour safety</a></li><li><a class="foot-link" href="/stories">Stories</a></li><li><a class="foot-link" href="/care">Care Room</a></li><li><a class="foot-link" href="/me">Your space</a></li><li><a class="foot-link" href="/faq">FAQ</a></li><li><a class="foot-link" href="/contact">Contact</a></li><li><a class="foot-link" href="/terms">Terms</a></li><li><a class="foot-link" href="/privacy">Privacy</a></li></ul>
+      <ul class="flex flex-wrap gap-x-5 gap-y-1 items-start"><li><a class="foot-link" href="/what-is-bts-army">What is BTS ARMY?</a></li><li><a class="foot-link" href="/bts-army-india">BTS ARMY India</a></li><li><a class="foot-link" href="/bts-army-usa">BTS ARMY USA</a></li><li><a class="foot-link" href="/tour">Tour safety</a></li><li><a class="foot-link" href="/stories">Stories</a></li><li><a class="foot-link" href="/care">Care Room</a></li><li><a class="foot-link" href="/me">Your space</a></li><li><a class="foot-link" href="/faq">FAQ</a></li><li><a class="foot-link" href="/contact">Contact</a></li><li><a class="foot-link" href="/terms">Terms</a></li><li><a class="foot-link" href="/privacy">Privacy</a></li></ul>
     </div>
   </div>
 </footer>`;
@@ -138,34 +139,49 @@ function layout(ctx, page) {
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
 <meta name="robots" content="${page.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'}">
-<meta name="google-site-verification" content="cS-nZOsOb-dKYry8yz7e4_qhqMKMLLbsa6I-o8kpB1A">
-<meta name="msvalidate.01" content="1545E47A6B145F28F5BCD1CD76F2664D">
-<meta name="theme-color" content="#0b0714">
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WPD4LFPM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
+<meta name="keywords" content="${esc(seo.KEYWORDS.join(', '))}">
+<meta name="application-name" content="ARMY Hub">
+<meta name="apple-mobile-web-app-title" content="ARMY Hub">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0b0714" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f3ff" media="(prefers-color-scheme: light)">
+<meta name="msapplication-TileColor" content="#0c0a12">
+<meta name="msapplication-config" content="/browserconfig.xml">
 <script src="${asset('/js/theme.js')}"></script>
 <link rel="canonical" href="${esc(url)}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-light-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/favicon-dark-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/apple-touch-icon-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7c4aed">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="Summary for AI assistants">
 <meta property="og:site_name" content="${esc(s.siteName)}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${page.ogType || 'website'}">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="en_IN">
 <meta property="og:title" content="${esc(page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
 <meta property="og:url" content="${esc(url)}">
 <meta property="og:image" content="${esc(og)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(s.siteName)}: unofficial BTS fan site for ARMY">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(page.title)}">
 <meta name="twitter:description" content="${esc(page.description)}">
 <meta name="twitter:image" content="${esc(og)}">
+<meta name="twitter:image:alt" content="${esc(s.siteName)}: unofficial BTS fan site for ARMY">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Unbounded:wght@500;700;900&display=swap">

@@ -1,16 +1,72 @@
 {
-  "name": "ARMY Hub",
+  "id": "/",
+  "name": "ARMY Hub: BTS ARMY Fan Hub",
   "short_name": "ARMY Hub",
-  "description": "Unofficial BTS fan site: albums, photos, videos and fan letters.",
-  "start_url": "/",
+  "description": "Unofficial BTS fan site for ARMY: members, albums, photos, videos, tour safety and fan letters.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
+  "orientation": "any",
   "background_color": "#0c0a12",
   "theme_color": "#0c0a12",
+  "categories": [
+    "music",
+    "entertainment",
+    "social"
+  ],
   "icons": [
+    {
+      "src": "/favicon-36.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-296.png",
+      "sizes": "296x296",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-384.png",
+      "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
@@ -21,10 +77,70 @@
       "purpose": "any"
     },
     {
+      "src": "/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "BTS members",
+      "short_name": "Members",
+      "url": "/#members",
+      "icons": [
+        {
+          "src": "/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "Albums",
+      "short_name": "Albums",
+      "url": "/#music",
+      "icons": [
+        {
+          "src": "/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "Tour safety",
+      "short_name": "Tour",
+      "url": "/tour",
+      "icons": [
+        {
+          "src": "/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "What is BTS ARMY?",
+      "short_name": "ARMY",
+      "url": "/what-is-bts-army",
+      "icons": [
+        {
+          "src": "/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
     }
   ]
 }

@@ -21,6 +21,8 @@ const { home } = require('./views/home');
 const pages = require('./views/pages');
 const lettersView = require('./views/letters');
 const modules = require('./views/modules');
+const seoViews = require('./views/seo');
+const seo = require('./lib/seo');
 const { CATEGORIES: STORY_CATEGORIES } = require('./lib/content');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -55,7 +57,7 @@ app.use(helmet({
     useDefaults: false,
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.youtube.com', 'https://www.googletagmanager.com'],   // youtube.com: the music tray loads the YouTube player API, only after a visitor presses play. googletagmanager.com: analytics.
+      scriptSrc: ["'self'", 'https://www.youtube.com'],   // youtube.com: the music tray loads the YouTube player API, only after a visitor presses play
       styleSrc: ["'self'", 'https://fonts.googleapis.com'],
       styleSrcAttr: ["'unsafe-inline'"],
       fontSrc: ['https://fonts.gstatic.com'],
@@ -103,6 +105,9 @@ app.use(express.static(PUBLIC, { maxAge: PROD ? '1y' : 0, index: false, setHeade
 /* ---------- public pages ---------- */
 app.get('/', (req, res) => render(req, res, home));
 app.get('/about', (req, res) => render(req, res, pages.about));
+app.get('/what-is-bts-army', (req, res) => render(req, res, seoViews.army));
+app.get('/bts-army-india', (req, res) => render(req, res, seoViews.india));
+app.get('/bts-army-usa', (req, res) => render(req, res, seoViews.usa));
 app.get('/faq', (req, res) => render(req, res, pages.faq));
 app.get('/contact', (req, res) => render(req, res, pages.contact));
 app.get('/terms', (req, res) => render(req, res, pages.terms));
@@ -114,29 +119,19 @@ app.get('/me', (req, res) => render(req, res, modules.me));
 app.get('/healthz', (req, res) => res.json({ ok: true }));
 
 /* ---------- SEO files ---------- */
-app.get('/robots.txt', (req, res) => {
-  const { base } = ctxFor(req);
-  res.type('text/plain').send(`User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /me\nDisallow: /api/\n\nSitemap: ${base}/sitemap.xml\n`);
-});
+app.get('/robots.txt', (req, res) => res.type('text/plain').send(seo.ROBOTS(ctxFor(req).base)));
+app.get('/llms.txt', (req, res) => res.type('text/plain; charset=utf-8').send(seo.llmsTxt(ctxFor(req).base)));
 app.get('/sitemap.xml', (req, res) => {
   const { base } = ctxFor(req);
   const db = store.get();
   const last = db.settings.legalUpdated;
   const abs = (p) => esc(/^https?:/.test(p) ? p : base + p);
   const images = MEMBERS.map((m) => [m.image, `${m.stage} (${m.name}) portrait`]).concat(db.albums.map((a) => [a.image, `${a.title} cover art`])).concat(db.gallery.map((g) => [g.image, g.caption])).slice(0, 1000);
-  const url = (p, freq, pri, extra = '') => `<url><loc>${base}${p}</loc><lastmod>${last}</lastmod><changefreq>${freq}</changefreq><priority>${pri}</priority>${extra}</url>`;
+  const url = (p, freq, pri, extra = '') => `<url><loc>${base}${p}</loc><lastmod>${/^\/(what-is-bts-army|bts-army-)/.test(p) ? seo.REVIEWED : last}</lastmod><changefreq>${freq}</changefreq><priority>${pri}</priority>${extra}</url>`;
   const imgXml = images.map(([src, cap]) => `<image:image><image:loc>${abs(src)}</image:loc><image:caption>${esc(cap)}</image:caption></image:image>`).join('');
   res.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${url('/', 'weekly', '1.0', imgXml)}
-${url('/about', 'monthly', '0.6')}
-${url('/faq', 'monthly', '0.7')}
-${url('/tour', 'weekly', '0.7')}
-${url('/stories', 'monthly', '0.5')}
-${url('/care', 'monthly', '0.5')}
-${url('/contact', 'yearly', '0.5')}
-${url('/terms', 'yearly', '0.3')}
-${url('/privacy', 'yearly', '0.3')}
+${seo.URLS.map(([p, f, pr]) => url(p, f, pr, p === '/' ? imgXml : '')).join('\n')}
 </urlset>`);
 });
 
